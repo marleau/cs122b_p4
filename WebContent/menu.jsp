@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 	function liveSearch(str) {
 		var ajaxRequest;
 	    if (str.length==0) { 
@@ -17,7 +17,7 @@
 	        }
 	    }
 	    xmlhttp.open("GET","LiveSearch?arg="+str,true);
-	    xmlhttp.send();
+	    xmlhttp.send(null);
 	}
 	
 	function showPopup(id) {
@@ -35,7 +35,7 @@
 		<li><a href="ListResults">Browse</a></li>
 		<li>
 			<FORM ACTION="ListResults" METHOD="GET">
-				<INPUT TYPE="TEXT" NAME="arg" onkeyup="liveSearch(this.value)">
+				<INPUT TYPE="TEXT" NAME="arg" onkeyup="liveSearch(this.value);">
 				<INPUT TYPE="HIDDEN" NAME=rpp VALUE="5">
 				<input TYPE="SUBMIT" VALUE="Search Movies">
 			</FORM>

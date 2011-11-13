@@ -51,7 +51,7 @@ public class Page {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is));			
 			try {
 				while (reader.ready()) {
-					rtn += reader.readLine();
+					rtn += reader.readLine() + "\n";
 				}
 			} catch (IOException e) {
 				//If error... use old menu

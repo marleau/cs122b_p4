@@ -26,27 +26,21 @@ public class LiveSearch extends HttpServlet {
 		response.setContentType("text/html"); // Response mime type
 		PrintWriter out = response.getWriter();
 		ServletContext context = getServletContext();
-		HttpSession session = request.getSession();
 		
 		try {
 			Connection dbcon = Database.openConnection();
 
-			String arg = request.getParameter("arg");// search string
-			Integer page = 1;
-			Integer resultsPerPage = 100;
+			String arg = request.getParameter("arg");
 			
 			try {
 				Pattern.compile(arg);
 			} catch (PatternSyntaxException exception) {
 				arg = "";
 			}
-			String sortBy = "ORDER BY title";	
 			
-			String cleanArg = Database.cleanSQL(arg);//CLEAN FOR SQL
+			String cleanArg = Database.cleanSQL(arg);
 			
-			// Declare our statement
 			Statement statement = dbcon.createStatement();
-			Statement fullStatement = dbcon.createStatement();
 			String query;
 			
 			query = "SELECT DISTINCT m.id,title,year,director,banner_url FROM movies m WHERE title REGEXP '" + cleanArg + "' ORDER BY title;";
@@ -65,7 +59,7 @@ public class LiveSearch extends HttpServlet {
 				Integer year = searchResults.getInt("year");
 				
 				out.println("<li>");
-				out.println("<a href=\"MovieDetails?id=" + movieID + "\" onmouseover=\"showPopup("+movieID+")\" onmouseout=\"hidePopup("+movieID+")\">" + title + " (" + year + ")</a><br/>");
+				out.println("<a href=\"MovieDetails?id=" + movieID + "\" onmouseover=\"showPopup("+movieID+")\" onmouseout=\"hidePopup("+movieID+")\">" + title + " (" + year + ")</a>");
 				SearchPopup.getPopup(request, response, context, movieID);
 				out.println("</li>");
 			}

@@ -54,15 +54,10 @@ public class SearchPopup extends HttpServlet {
 				String bannerURL = rs.getString("banner_url");
 				String trailerURL = rs.getString("trailer_url");
 
-//				session.setAttribute("title", title + " ("+year+")");
 				// header
-//				out.println("<html><head><title>SearchPopup - "+title+"</title><style>"+Page.readStyle(context)+"</style></head><body><div class=\"content\">");
-//				out.println("<div class=\"movie-detail\">");
 				out.println("<div class=\"movie-detail\"  id=\""+movieID+"\">");
 
 				// Movie Info
-//				out.println("<H1>" + title + " ("+year+")");
-//				out.println("</H1>");
 								
 				out.println(title + " ("+year+")<br /><br />");
 				
@@ -111,9 +106,6 @@ public class SearchPopup extends HttpServlet {
 				}
 			}
 
-			// Footer
-//			Page.footer(out);
-
 			rs.close();
 			statement.close();
 			dbcon.close();
@@ -132,7 +124,6 @@ public class SearchPopup extends HttpServlet {
 					+ ex.toString() + "</P></DIV></BODY></HTML>");
 			return;
 		}
-//		out.close();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
