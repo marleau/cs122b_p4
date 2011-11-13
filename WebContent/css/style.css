@@ -87,7 +87,7 @@ div#liveSearch ul.livePopup li div.movie-detail {
 	overflow: hidden;
 	border: 3px solid #999999;
 	padding: 5px;
-	width: 300;
+	width: 300px;
 }
 
 div#liveSearch ul.livePopup li div * {
@@ -98,7 +98,7 @@ div#liveSearch ul.livePopup li div * {
 }
 
 /*div#liveSearch ul.livePopup li {
-	width: 850 px;
+	width: 250 px;
 }*/
 
 div#liveSearch ul.livePopup li a {
