@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class Page {
 	
 	public static String header(ServletContext context, HttpSession session) {
-		String rtn = "<!DOCTYPE html>		<html>" + "			<head>" + "		        <title>Fabflix - " + session.getAttribute("title") + "</title>" + "						<style type=\"text/css\">"
+		String rtn = "<!DOCTYPE html>\n<html>" + "			<head>" + "		        <title>Fabflix - " + session.getAttribute("title") + "</title>" + "						<style type=\"text/css\">"
 				+ readStyle(context) + "				</style>" + "		</head>	<body>" + readMenu(context, session) + "<div class=\"content\">";
 		return rtn;
 	}
