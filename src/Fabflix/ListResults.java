@@ -218,9 +218,9 @@ public class ListResults extends HttpServlet {
 				String bannerURL = searchResults.getString("banner_url");
 				String director = searchResults.getString("director");
 
-				out.println("<a href=\"MovieDetails?id=" + movieID + "\"><h2>" + title + " (" + year + ")");
+				out.println("<a href=\"MovieDetails?id=" + movieID + "\"><h2>" + title + " (" + year + ")</h2></a>");
 				Page.addToCart(out, movieID);
-				out.println("</h2><img src=\"" + bannerURL + "\" height=\"200\" alt=\""+title+"\" width=\"200px\"></a>");
+				out.println("<a href=\"MovieDetails?id=" + movieID + "\"><img src=\"" + bannerURL + "\" height=\"200\" alt=\""+title+"\" width=\"200px\" /></a>");
 
 				out.println("<div class=\"info\"><ul>");
 				out.println("<li>ID</li><li><a href=\"MovieDetails?id=" + movieID + "\">" + movieID + "</a></li></ul>");

@@ -189,4 +189,14 @@
     <servlet-name>SearchPopup</servlet-name>
     <url-pattern>/SearchPopup</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LiveSearch</display-name>
+    <servlet-name>LiveSearch</servlet-name>
+    <servlet-class>Fabflix.LiveSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LiveSearch</servlet-name>
+    <url-pattern>/LiveSearch</url-pattern>
+  </servlet-mapping>
 </web-app>

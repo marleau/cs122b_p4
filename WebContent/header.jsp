@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
         <title>Fabflix - <%= (String) session.getAttribute("title") %></title>
-		<style>
+		<style type="text/css">
 			<%@ include file="css/style.css" %>
 		</style>
 	</head>
@@ -18,4 +18,3 @@
 	<% } %>	
 		
 	<div class="content">
-	

@@ -164,7 +164,6 @@ public class AdvancedSearch extends HttpServlet {
 						+ "<INPUT TYPE=\"HIDDEN\" NAME=rpp VALUE=\"" + resultsPerPage
 						+ "\"><INPUT TYPE=\"SUBMIT\" VALUE=\"Search\"> <INPUT TYPE=\"RESET\" VALUE=\"Reset\"> </FORM>");
 				Page.footer(out);
-				out.println("</body></html>");
 			} else if (paramCount == 1 && sub.isEmpty()) {
 				// Redirect to simple search for single parameter
 				if (!(t == null || t.isEmpty())) {
@@ -359,7 +358,7 @@ public class AdvancedSearch extends HttpServlet {
 				out.println("SQL Exception:  " + ex.getMessage());
 				ex = ex.getNextException();
 			} // end while
-			out.println("</DIV></BODY></HTML>");
+			Page.footer(out);
 		} // end catch SQLException
 		catch (java.lang.Exception ex) {
 			out.println(Page.header(context, session));
