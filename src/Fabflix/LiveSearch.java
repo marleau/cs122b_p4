@@ -32,38 +32,81 @@ public class LiveSearch extends HttpServlet {
 
 			String arg = request.getParameter("arg");
 			
-			try {
-				Pattern.compile(arg);
-			} catch (PatternSyntaxException exception) {
-				arg = "";
-			}
+//			try {
+//				Pattern.compile(arg);
+//			} catch (PatternSyntaxException exception) {
+//				arg = "";
+//			}
 			
-			String cleanArg = Database.cleanSQL(arg);
+			String[] args = arg.split(" ");
+			
+//			for (String s : args) {
+//				System.out.println("\t"+s);
+//			}
+			
+			String cleanArgs = "";
+			for (int i = 0; i < args.length; i++) {
+				args[i] = args[i].trim();
+				if (args[i].startsWith("-")) {
+					cleanArgs += args[i];
+				} else {
+					cleanArgs += "+"+args[i];
+				}
+				if (i == args.length -1) {
+					cleanArgs += "*";
+				} else {
+					cleanArgs += " ";
+				}
+			}
+			System.out.println(cleanArgs);
+			cleanArgs = Database.cleanSQL(cleanArgs);
+			
+//			String cleanArg = Database.cleanSQL(arg);
 			
 			Statement statement = dbcon.createStatement();
 			String query;
 			
-			query = "SELECT DISTINCT m.id,title,year,director,banner_url FROM movies m WHERE title REGEXP '" + cleanArg + "' ORDER BY title;";
+//			query = "SELECT DISTINCT m.id,title,year,director,banner_url FROM movies m WHERE title REGEXP '" + cleanArg + "' ORDER BY title;";
+			query = "SELECT * FROM ft WHERE MATCH (title) AGAINST ('"+cleanArgs+"' IN BOOLEAN MODE) ORDER BY title;";
 			
 			ResultSet searchResults = statement.executeQuery(query);
 			
-			out.println("<ul class=\"livePopup\">");
-			while (searchResults.next()) {// For each movie, DISPLAY INFORMATION
-				Integer movieID;
-				try {
-					movieID = Integer.valueOf(searchResults.getString("id"));
-				} catch (Exception e) {
-					movieID = 0;
-				}
-				String title = searchResults.getString("title");
-				Integer year = searchResults.getInt("year");
-				
-				out.println("<li>");
-				out.println("<a href=\"MovieDetails?id=" + movieID + "\" onmouseover=\"showPopup("+movieID+")\" onmouseout=\"hidePopup("+movieID+")\">" + title + " (" + year + ")</a>");
-				SearchPopup.getPopup(request, response, context, movieID);
-				out.println("</li>");
+			if (searchResults.next()) {
+				out.println("<ul class=\"livePopup\">");
+					Integer movieID;
+					try {
+						movieID = Integer.valueOf(searchResults.getString("movie_id"));
+					} catch (Exception e) {
+						movieID = 0;
+					}
+					String title = searchResults.getString("title");
+					Integer year = searchResults.getInt("year");
+					
+					out.println("<li>");
+					out.println("<a href=\"MovieDetails?id=" + movieID + "\" onmouseover=\"showPopup("+movieID+")\" onmouseout=\"hidePopup("+movieID+")\">" + title + " (" + year + ")</a>");
+					SearchPopup.getPopup(request, response, context, movieID);
+					out.println("</li>");
+					
+					while (searchResults.next()) {// For each movie, DISPLAY INFORMATION
+						try {
+							movieID = Integer.valueOf(searchResults.getString("movie_id"));
+						} catch (Exception e) {
+							movieID = 0;
+						}
+						title = searchResults.getString("title");
+						year = searchResults.getInt("year");
+						
+						out.println("<li>");
+						out.println("<a href=\"MovieDetails?id=" + movieID + "\" onmouseover=\"showPopup("+movieID+")\" onmouseout=\"hidePopup("+movieID+")\">" + title + " (" + year + ")</a>");
+						SearchPopup.getPopup(request, response, context, movieID);
+						out.println("</li>");
+					}
+					out.println("</ul>");
+				System.out.println("Has results.");
+			} else {
+				out.println("");
+				System.out.println("No results.");
 			}
-			out.println("</ul>");
 		} catch (Exception e) {}
 	}
 
