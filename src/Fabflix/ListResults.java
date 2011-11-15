@@ -49,10 +49,10 @@ public class ListResults extends HttpServlet {
 			try {
 				if (!(searchBy.equals("title") || searchBy.equals("letter") || searchBy.equals("genre") || searchBy.equals("year")
 						|| searchBy.equals("director") || searchBy.equals("first_name") || searchBy.equals("last_name") || searchBy.equals("all"))) {
-					searchBy = "all";
+					searchBy = "title";
 				}
 			} catch (NullPointerException e) {
-				searchBy = "all";
+				searchBy = "title";
 			}
 
 			// ===Argument value
