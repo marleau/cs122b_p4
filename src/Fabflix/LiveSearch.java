@@ -107,6 +107,8 @@ public class LiveSearch extends HttpServlet {
 				out.println("");
 				System.out.println("No results.");
 			}
+			
+			dbcon.close();
 		} catch (Exception e) {}
 	}
 
